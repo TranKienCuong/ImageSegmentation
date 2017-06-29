@@ -39,15 +39,25 @@
             this.runButton = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.noticeLabel = new System.Windows.Forms.Label();
+            this.maxLoopsNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.minErrorNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.inputPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.outputPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.meansNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxLoopsNumericUpDown)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.minErrorNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // inputPictureBox
             // 
             this.inputPictureBox.BackColor = System.Drawing.Color.White;
-            this.inputPictureBox.Location = new System.Drawing.Point(17, 121);
+            this.inputPictureBox.Location = new System.Drawing.Point(17, 139);
             this.inputPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.inputPictureBox.Name = "inputPictureBox";
             this.inputPictureBox.Size = new System.Drawing.Size(557, 480);
@@ -58,7 +68,7 @@
             // outputPictureBox
             // 
             this.outputPictureBox.BackColor = System.Drawing.Color.White;
-            this.outputPictureBox.Location = new System.Drawing.Point(582, 121);
+            this.outputPictureBox.Location = new System.Drawing.Point(582, 139);
             this.outputPictureBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.outputPictureBox.Name = "outputPictureBox";
             this.outputPictureBox.Size = new System.Drawing.Size(557, 480);
@@ -70,7 +80,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(13, 96);
+            this.label1.Location = new System.Drawing.Point(13, 114);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(104, 20);
@@ -81,7 +91,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(578, 96);
+            this.label2.Location = new System.Drawing.Point(578, 114);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(117, 20);
@@ -90,11 +100,10 @@
             // 
             // pathLabel
             // 
-            this.pathLabel.AutoSize = true;
-            this.pathLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pathLabel.Location = new System.Drawing.Point(13, 65);
+            this.pathLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pathLabel.Location = new System.Drawing.Point(13, 63);
             this.pathLabel.Name = "pathLabel";
-            this.pathLabel.Size = new System.Drawing.Size(74, 20);
+            this.pathLabel.Size = new System.Drawing.Size(682, 51);
             this.pathLabel.TabIndex = 4;
             this.pathLabel.Text = "File path:";
             // 
@@ -131,14 +140,13 @@
             0,
             0});
             this.meansNumericUpDown.Name = "meansNumericUpDown";
-            this.meansNumericUpDown.Size = new System.Drawing.Size(109, 26);
+            this.meansNumericUpDown.Size = new System.Drawing.Size(92, 26);
             this.meansNumericUpDown.TabIndex = 8;
             this.meansNumericUpDown.Value = new decimal(new int[] {
             3,
             0,
             0,
             0});
-            this.meansNumericUpDown.ValueChanged += new System.EventHandler(this.meansNumericUpDown_ValueChanged);
             // 
             // runButton
             // 
@@ -147,7 +155,7 @@
             this.runButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.runButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.runButton.ForeColor = System.Drawing.Color.White;
-            this.runButton.Location = new System.Drawing.Point(494, 12);
+            this.runButton.Location = new System.Drawing.Point(479, 12);
             this.runButton.Name = "runButton";
             this.runButton.Size = new System.Drawing.Size(95, 40);
             this.runButton.TabIndex = 9;
@@ -162,18 +170,105 @@
             // noticeLabel
             // 
             this.noticeLabel.AutoSize = true;
-            this.noticeLabel.Location = new System.Drawing.Point(606, 22);
+            this.noticeLabel.Location = new System.Drawing.Point(580, 22);
             this.noticeLabel.Name = "noticeLabel";
-            this.noticeLabel.Size = new System.Drawing.Size(172, 20);
+            this.noticeLabel.Size = new System.Drawing.Size(101, 20);
             this.noticeLabel.TabIndex = 10;
-            this.noticeLabel.Text = "Please load an image...";
+            this.noticeLabel.Text = "Please wait...";
             this.noticeLabel.Visible = false;
+            // 
+            // maxLoopsNumericUpDown
+            // 
+            this.maxLoopsNumericUpDown.Location = new System.Drawing.Point(96, 26);
+            this.maxLoopsNumericUpDown.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.maxLoopsNumericUpDown.Minimum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.maxLoopsNumericUpDown.Name = "maxLoopsNumericUpDown";
+            this.maxLoopsNumericUpDown.Size = new System.Drawing.Size(95, 26);
+            this.maxLoopsNumericUpDown.TabIndex = 11;
+            this.maxLoopsNumericUpDown.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.minErrorNumericUpDown);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.maxLoopsNumericUpDown);
+            this.groupBox1.Location = new System.Drawing.Point(875, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(217, 95);
+            this.groupBox1.TabIndex = 12;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "More options";
+            // 
+            // minErrorNumericUpDown
+            // 
+            this.minErrorNumericUpDown.Location = new System.Drawing.Point(96, 58);
+            this.minErrorNumericUpDown.Name = "minErrorNumericUpDown";
+            this.minErrorNumericUpDown.Size = new System.Drawing.Size(95, 26);
+            this.minErrorNumericUpDown.TabIndex = 16;
+            this.minErrorNumericUpDown.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 60);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(75, 20);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Min error:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 28);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(84, 20);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Max loops:";
+            // 
+            // saveButton
+            // 
+            this.saveButton.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.saveButton.FlatAppearance.BorderSize = 0;
+            this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveButton.ForeColor = System.Drawing.Color.White;
+            this.saveButton.Location = new System.Drawing.Point(715, 98);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(116, 36);
+            this.saveButton.TabIndex = 13;
+            this.saveButton.Text = "Save output";
+            this.saveButton.UseVisualStyleBackColor = false;
+            this.saveButton.Visible = false;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.Filter = "Image files(*.JPG;*.BMP;*.PNG;*.GIF)|*.JPG;*.BMP;*.PNG;*.GIF|All files (*.*)|*.*";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1153, 615);
+            this.ClientSize = new System.Drawing.Size(1153, 632);
+            this.Controls.Add(this.saveButton);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.noticeLabel);
             this.Controls.Add(this.runButton);
             this.Controls.Add(this.meansNumericUpDown);
@@ -192,6 +287,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.inputPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.outputPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.meansNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxLoopsNumericUpDown)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.minErrorNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,6 +309,13 @@
         private System.Windows.Forms.Button runButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Label noticeLabel;
+        private System.Windows.Forms.NumericUpDown maxLoopsNumericUpDown;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.NumericUpDown minErrorNumericUpDown;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
 

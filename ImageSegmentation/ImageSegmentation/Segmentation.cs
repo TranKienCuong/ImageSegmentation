@@ -13,21 +13,24 @@ namespace ImageSegmentation
     public class Segmentation
     {
         int K;
-        int MaximumLoop = 100;
-        int MinE = 10;
+        int MaxLoops = 50;
+        int MinE = 5;
         List<Pixel> Pixels = new List<Pixel>();
         List<Pixel> Means = new List<Pixel>();
         List<Pixel>[] Clusters;
-        List<int>[] MultipleResults = new List<int>[3];
+        List<Dictionary<int, int>> Results = new List<Dictionary<int, int>>();
 
         public Segmentation() { }
 
-        public Segmentation(int K)
+        public Segmentation(int K, int MaxLoops, int MinE)
         {
             this.K = K;
+            this.MaxLoops = MaxLoops;
+            this.MinE = MinE;
+
             Clusters = new List<Pixel>[K];
             for (int i = 0; i < K; i++)
-                Clusters[i] = new List<Pixel>();
+                Clusters[i] = new List<Pixel>();          
         }
 
         public Bitmap GetOutputImage(Bitmap input)
@@ -61,9 +64,9 @@ namespace ImageSegmentation
             }
         }
 
-        int SquareDistance(Pixel a, Pixel b)
+        int Distance(Pixel a, Pixel b)
         {
-            return (a.R - b.R) * (a.R - b.R) + (a.G - b.G) * (a.G - b.G) + (a.B - b.B) * (a.B - b.B) + (a.X - b.X) * (a.X - b.X) + (a.Y - b.Y) * (a.Y - b.Y);
+            return (a.R - b.R) * (a.R - b.R) * 3 + (a.G - b.G) * (a.G - b.G) * 3 + (a.B - b.B) * (a.B - b.B) * 3 + (a.X - b.X) * (a.X - b.X) + (a.Y - b.Y) * (a.Y - b.Y);
         }
 
         void KMeans()
@@ -82,7 +85,7 @@ namespace ImageSegmentation
             int loop = 0;
             int e = int.MaxValue;
 
-            while (loop < MaximumLoop && e > MinE)
+            while (loop < MaxLoops && e > MinE)
             {
                 // label each pixel to the closest mean
                 foreach (Pixel p in Pixels)
@@ -92,7 +95,7 @@ namespace ImageSegmentation
                     for (int i = 0; i < K; i++)
                     {
                         Pixel mean = Means[i];
-                        int distance = SquareDistance(p, mean);
+                        int distance = Distance(p, mean);
                         if (distance < minDistance)
                         {
                             minDistance = distance;
@@ -118,10 +121,12 @@ namespace ImageSegmentation
                     }
                     int n = Clusters[i].Count;
                     Pixel temp = new Pixel(sumR / n, sumG / n, sumB / n, sumX / n, sumY / n);
-                    e += SquareDistance(Means[i], temp);
+                    e += Distance(Means[i], temp);
                     Means[i] = temp;
                 }
+                loop++;
             }
+            Console.WriteLine(loop);
         }
 
         Color GetClusterColor(List<Pixel> pixels)
