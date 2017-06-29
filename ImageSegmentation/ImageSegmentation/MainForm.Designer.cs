@@ -218,11 +218,6 @@
             this.minErrorNumericUpDown.Name = "minErrorNumericUpDown";
             this.minErrorNumericUpDown.Size = new System.Drawing.Size(95, 26);
             this.minErrorNumericUpDown.TabIndex = 16;
-            this.minErrorNumericUpDown.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
             // 
             // label6
             // 
@@ -260,7 +255,7 @@
             // 
             // saveFileDialog
             // 
-            this.saveFileDialog.Filter = "Image files(*.JPG;*.BMP;*.PNG;*.GIF)|*.JPG;*.BMP;*.PNG;*.GIF|All files (*.*)|*.*";
+            this.saveFileDialog.Filter = "Image files(*.PNG;*.BMP;*.JPG;*.GIF)|*.PNG;*.BMP;*.JPG;*.GIF|All files (*.*)|*.*";
             // 
             // MainForm
             // 

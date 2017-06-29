@@ -14,11 +14,10 @@ namespace ImageSegmentation
     {
         int K;
         int MaxLoops = 50;
-        int MinE = 5;
+        int MinE = 0;
         List<Pixel> Pixels = new List<Pixel>();
         List<Pixel> Means = new List<Pixel>();
         List<Pixel>[] Clusters;
-        List<Dictionary<int, int>> Results = new List<Dictionary<int, int>>();
 
         public Segmentation() { }
 
@@ -64,7 +63,7 @@ namespace ImageSegmentation
             }
         }
 
-        int Distance(Pixel a, Pixel b)
+        long Distance(Pixel a, Pixel b)
         {
             return (a.R - b.R) * (a.R - b.R) * 3 + (a.G - b.G) * (a.G - b.G) * 3 + (a.B - b.B) * (a.B - b.B) * 3 + (a.X - b.X) * (a.X - b.X) + (a.Y - b.Y) * (a.Y - b.Y);
         }
@@ -78,24 +77,24 @@ namespace ImageSegmentation
                 Pixel p = Pixels[rand.Next(Pixels.Count)];
                 if (!Means.Contains(p))
                     Means.Add(p);
-                else
+                else // ignore adding mean if it's already existed
                     i--;
             }
 
             int loop = 0;
-            int e = int.MaxValue;
+            long e = int.MaxValue;
 
             while (loop < MaxLoops && e > MinE)
             {
                 // label each pixel to the closest mean
                 foreach (Pixel p in Pixels)
                 {
-                    int minDistance = int.MaxValue;
+                    long minDistance = long.MaxValue;
                     int label = 0;
                     for (int i = 0; i < K; i++)
                     {
                         Pixel mean = Means[i];
-                        int distance = Distance(p, mean);
+                        long distance = Distance(p, mean);
                         if (distance < minDistance)
                         {
                             minDistance = distance;
@@ -110,7 +109,7 @@ namespace ImageSegmentation
                 e = 0;
                 for (int i = 0; i < K; i++)
                 {
-                    int sumR = 0, sumG = 0, sumB = 0, sumX = 0, sumY = 0;
+                    long sumR = 0, sumG = 0, sumB = 0, sumX = 0, sumY = 0;
                     foreach (Pixel p in Clusters[i])
                     {
                         sumR += p.R;
@@ -120,7 +119,7 @@ namespace ImageSegmentation
                         sumY += p.Y;
                     }
                     int n = Clusters[i].Count;
-                    Pixel temp = new Pixel(sumR / n, sumG / n, sumB / n, sumX / n, sumY / n);
+                    Pixel temp = new Pixel((int)(sumR / n), (int)(sumG / n), (int)(sumB / n), (int)(sumX / n), (int)(sumY / n));
                     e += Distance(Means[i], temp);
                     Means[i] = temp;
                 }
@@ -131,7 +130,7 @@ namespace ImageSegmentation
 
         Color GetClusterColor(List<Pixel> pixels)
         {
-            int sumR = 0, sumG = 0, sumB = 0;
+            long sumR = 0, sumG = 0, sumB = 0;
             foreach (Pixel p in pixels)
             {
                 sumR += p.R;
@@ -139,7 +138,7 @@ namespace ImageSegmentation
                 sumB += p.B;
             }
             int n = pixels.Count;
-            return Color.FromArgb(sumR / n, sumG / n, sumB / n);
+            return Color.FromArgb((int)(sumR / n), (int)(sumG / n), (int)(sumB / n));
         }
     }
 }
